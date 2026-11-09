@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="56" viewBox="0 0 240 56" role="img" aria-label="matumi wordmark">
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="56" viewBox="0 0 240 56" role="img" aria-label="matumi">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&amp;display=swap');
-    text { font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; }
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&amp;display=swap');
+    text { font-family: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; }
   </style>
-  <!-- NOTE: rendered with a webfont; convert text to outlines before production use outside browsers -->
-  <text x="4" y="40" font-size="40" fill="#1C1B18">matum<tspan fill="#2A6B4E">i</tspan></text>
+  <!-- Set in a web font: convert the text to outlines before using this outside a browser. -->
+  <text x="4" y="40" font-size="40" fill="#1C1B18">matumi</text>
 </svg>
