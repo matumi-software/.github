@@ -34,6 +34,24 @@ construction, with only the circle in canopy.
   with light and dark values and what each is for. A product adds its own tokens on top, such as
   Koppel's device states.
 
+## Where each image goes
+
+Uploads are by hand; none of these services takes them through an API.
+
+| Place | File | Where to set it |
+|---|---|---|
+| GitHub organisation | `assets/Org/matumi-software-avatar.png` | Organisation settings > Profile picture |
+| GitHub repos | each repo's `resources/design-system/assets/Social/*-social-preview.png` | Repo settings > General > Social preview |
+| Gravatar avatar | `assets/Gravatar/matumi-software-gravatar.png` (2048x2048, Gravatar's largest) | Gravatar > Avatars, for the organisation's email |
+| Gravatar background | `assets/Gravatar/matumi-software-gravatar-background.png` (2560x1440, from the SVG next to it) | Profile editor > Design > Background image, fill mode cover |
+| Docker Hub organisation | the Gravatar avatar above | Docker Hub takes organisation avatars only from Gravatar: put the Gravatar email in the organisation settings |
+| Docker Hub repositories | `koppel-app-icon-1000.png` in Koppel, `grove-app-icon-1000.png` in Wildwood | The camera button on the repository's logo. Docker Hub only offers this to Verified Publisher and Sponsored Open Source organisations; without it the repository shows the organisation avatar |
+
+The Gravatar background runs the family marks down both sides (Koppel, Skakel, Tweeling and the
+Wildwood spiral on the left; the spiral again, Grove and the Matumi rings on the right) and keeps
+the centre plain char, so the profile content sits on a quiet ground. Regenerate the PNG from the SVG at 2560 px wide
+with any SVG renderer.
+
 ## Colour and type
 
 | Token | Light | Dark | Use |
