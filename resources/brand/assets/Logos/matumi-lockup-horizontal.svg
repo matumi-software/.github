@@ -1,10 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="290" height="64" viewBox="0 0 290 64" role="img" aria-label="Matumi logo lockup: Grove mark and wordmark">
+<svg xmlns="http://www.w3.org/2000/svg" width="290" height="64" viewBox="0 0 290 64" role="img" aria-label="matumi">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&amp;display=swap');
-    text { font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; }
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&amp;display=swap');
+    text { font-family: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; }
   </style>
-  <!-- NOTE: rendered with a webfont; convert text to outlines before production use outside browsers -->
-  <path d="M16,47 V29 M16,34 C16,26.5 31,26.5 31,34 V47 M31,34 C31,26.5 46,26.5 46,34 V47" fill="none" stroke="#1C1B18" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="46" cy="19" r="4.5" fill="#2A6B4E"/>
-  <text x="62" y="46" font-size="38" fill="#1C1B18">matum<tspan fill="#2A6B4E">i</tspan></text>
+  <!-- Set in a web font: convert the text to outlines before using this outside a browser. -->
+  <circle cx="32" cy="32" r="25" fill="none" stroke="#1C1B18" stroke-width="5"/>
+  <circle cx="29.5" cy="34" r="14.5" fill="none" stroke="#1C1B18" stroke-width="5"/>
+  <circle cx="27.5" cy="35.5" r="6" fill="#2A6B4E"/>
+  <text x="72" y="45" font-size="38" fill="#1C1B18">matumi</text>
 </svg>
