@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Matumi Software LinkedIn banner</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* 1128x191, LinkedIn's company cover size. Rendered at 2x. The profile logo covers the bottom
+     left on desktop, so the lockup starts at x=300. */
+  html,body{margin:0;background:#161512}
+  .b{position:relative;width:1128px;height:191px;overflow:hidden;background:#161512;font-family:'Instrument Sans','Segoe UI',system-ui,sans-serif}
+  svg.rings{position:absolute;right:-60px;top:-110px;width:410px;height:410px}
+  .t{position:absolute;left:300px;top:0;height:191px;display:flex;align-items:center;gap:22px}
+  .t svg{width:76px;height:76px}
+  .w{font-weight:600;font-size:60px;letter-spacing:-0.02em;color:#EDEAE0;line-height:1}
+  .s{margin-top:10px;font-weight:500;font-size:17px;letter-spacing:0.01em;color:#EDEAE0;opacity:.62}
+</style></head>
+<body><div class="b">
+  <svg class="rings" viewBox="0 0 64 64">
+    <g transform="translate(32 32) scale(1.0) translate(-32 -32)">
+      <circle cx="32" cy="32" r="25" fill="none" stroke="#EDEAE0" stroke-opacity=".10" stroke-width="2"/>
+      <circle cx="29.5" cy="34" r="14.5" fill="none" stroke="#EDEAE0" stroke-opacity=".10" stroke-width="2"/>
+      <circle cx="27.5" cy="35.5" r="6" fill="#549572" fill-opacity=".9"/>
+    </g>
+  </svg>
+  <div class="t">
+    <svg viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="25" fill="none" stroke="#EDEAE0" stroke-width="5"/>
+      <circle cx="29.5" cy="34" r="14.5" fill="none" stroke="#EDEAE0" stroke-width="5"/>
+      <circle cx="27.5" cy="35.5" r="6" fill="#549572"/>
+    </svg>
+    <div><div class="w">matumi</div><div class="s">Independent software studio</div></div>
+  </div>
+</div></body></html>

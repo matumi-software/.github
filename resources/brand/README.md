@@ -41,6 +41,8 @@ Uploads are by hand; none of these services takes them through an API.
 | Place | File | Where to set it |
 |---|---|---|
 | GitHub organisation | `assets/Org/matumi-software-avatar.png` | Organisation settings > Profile picture |
+| LinkedIn logo | `assets/LinkedIn/matumi-linkedin-logo.png` (400x400, the org avatar) | Page admin view > Edit page > Logo |
+| LinkedIn banner | `assets/LinkedIn/matumi-linkedin-banner.png` (2256x382, 2x of 1128x191; from `linkedin-banner.html`) | Page admin view > Edit page > Cover image. The logo covers the bottom left on desktop, so the lockup sits right of it |
 | GitHub repos | each repo's `resources/design-system/assets/Social/*-social-preview.png` | Repo settings > General > Social preview |
 | Gravatar avatar | `assets/Gravatar/matumi-software-gravatar.png` (2048x2048, Gravatar's largest) | Gravatar > Avatars, for the organisation's email |
 | Gravatar background | `assets/Gravatar/matumi-software-gravatar-background.png` (2560x1440, from the SVG next to it) | Profile editor > Design > Background image, fill mode cover |
