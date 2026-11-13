@@ -17,3 +17,8 @@ GPL-3.0-or-later.
 **[Skakel](https://github.com/matumi-software/skakel)** is the link between apps on a local
 network: finding a server, pairing, signing in, and streaming data. Koppel is built on it. MIT, so
 apps of any licence can use it.
+
+## Support
+
+Matumi is built by one person. Patrons on [Patreon](https://www.patreon.com/matumi) get development
+updates and plans for what is coming, and help me spend more time on this work.
