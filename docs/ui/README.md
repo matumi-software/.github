@@ -13,6 +13,24 @@ A softer, more modern look than the current apps. Same Matumi colours and type (
 `resources/brand`), applied through one shared component set so every app shares buttons, icons,
 spacing and the app shell.
 
+## Interface rules
+
+These apply to every screen, and a design that breaks one is not finished.
+
+- **Say each thing once per screen.** A status, count, name or state appears in one place. If it
+  appears twice, the second one tells the reader something new, and it is not a copy of the first.
+  A device shown as connected does not also get a connected badge, a green dot and a line of text.
+- **Every element earns its place.** If removing it loses no information and no action, remove it.
+  That covers decorative badges, labels that restate the control, helper text that repeats the
+  label, a heading that repeats the page title, and made-up stats.
+- **It must not look generated.** No icon on every card, no uniform grids of identical cards, no
+  gradients, glows or emoji, no oversized hero headings in a tool, no pills on everything.
+  Hierarchy comes from spacing, weight and alignment, not from boxes and colour.
+- **Write for an intelligent adult.** Plain, direct text. No cheerleading, no explaining the
+  obvious, no filler.
+- **Review it that way.** The checklist for any new screen: what is shown twice, and what could be
+  removed?
+
 ## Outline
 
 | File | Covers |

@@ -41,6 +41,8 @@ That file is the same in every repo, so it is not repeated here.
   a repo holds several of each. One crate or package per folder.
 - Source images and brand files live in `resources/`, never in `src/`. Code that needs one copies
   it at build time.
+- Apps with a browser or webview UI carry Playwright as a dev dependency, in `src/`, for AI-assisted
+  design review and fault finding. It is dev only and never ships in a published package.
 - Builds, tests and packaging run on local machines. No CI workflows and no hosted runners.
 - Prose in docs, comments and commit messages uses no em dashes or en dashes.
 - The repo's own `CLAUDE.md` carries what is specific to it: the layout table, the rules that
