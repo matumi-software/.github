@@ -84,9 +84,20 @@ Setup shows the Matumi brand as the backdrop and the product in front.
 
 ## Where it lives
 
-Not decided. The installer is C# and WPF, a third language beside React and Rust, so by the repository
-rules (a different language is a reason to split) it belongs in its own repository, shared by every
-product, not in Heartwood. A product supplies its MSI, its mark, its name and its option text.
+In Heartwood, under `src/installer`, beside the tokens it is generated from. It is shared code, and shared
+code lives in Heartwood whatever its language. The repo then holds React, Rust and C#.
+
+| Common, in Heartwood | Per product repo |
+|---|---|
+| The WPF bootstrapper application | The MSI authoring: files, services, drivers, firewall rules |
+| The theme generated from the tokens, and the generator | The mark, the name and the app icon |
+| The screens and their behaviour | The product's option text and which screens it shows |
+
+A product writes no C#. It builds its MSI and hands the common bundle its mark, name and options.
+How a product's build gets the common bundle (a local NuGet feed, for example) is not decided.
+
+What would move it out of Heartwood: a different licence, a different release cadence, or a second
+maintainer who works only on it.
 
 ## Risks and things not yet verified
 
@@ -104,7 +115,7 @@ product, not in Heartwood. A product supplies its MSI, its mark, its name and it
 ## Next steps
 
 1. The design pass produces the screens with all options, in light, dark and colour vision mode.
-2. Decide the repository and name.
+2. Create `src/installer` in Heartwood and decide how products consume it.
 3. Build the tokens to XAML generator.
 4. Prototype with Verteller, which has the most options, then Koppel, which tests elevation, the service
    and the driver.

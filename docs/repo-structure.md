@@ -50,15 +50,17 @@ That file is the same in every repo, so it is not repeated here.
 
 ## Where a repo splits
 
-One repo per product, plus shared repos. Inside a repo, split into packages, not repos. A new repo
-is justified only by a different language, licence or audience, or release cadence.
+One repo per product, plus shared repos. Inside a repo, split into packages, not repos. Code shared by
+the products, such as the UI and the Windows installer, lives in Heartwood whatever its language. A new
+repo is justified by a different licence, audience or release cadence, such as Skakel, which is a
+product with its own users.
 
 | Repo | Holds |
 |---|---|
 | `koppel`, `tweeling`, `verteller`, `strook` | One product each |
 | `skakel` | The Rust SDK, used by Koppel and Tweeling |
 | `wildwood` | Grove, Forester, Warden |
-| `heartwood` | Shared TypeScript libraries, starting with the UI |
+| `heartwood` | Shared libraries: the React UI, Rust crates when they arrive, and the C# installer used by every Windows app |
 
 ## Heartwood
 
@@ -69,6 +71,9 @@ heartwood/<branch>/
   src/
     package.json
     pnpm-workspace.yaml
+    Cargo.toml     once the first shared crate arrives
+    crates/        shared Rust crates
+    installer/     C# and WPF: the setup window, its generated theme, the tokens to XAML generator
     packages/
       tokens/      colours, type, spacing, radii, motion as CSS variables
       icons/
@@ -80,5 +85,7 @@ heartwood/<branch>/
 
 - Packages publish as `@matumi/<name>`: `@matumi/tokens`, `@matumi/icons`, `@matumi/ui`,
   `@matumi/shell`. Each is versioned on its own.
-- A later shared library is a new folder under `packages/`.
+- A later shared TypeScript library is a new folder under `packages/`, a Rust one under `crates/`.
+- The installer is built as a versioned package that each product's build uses. A product supplies its
+  MSI authoring, its mark, its name and its option text, and writes no C#.
 - A product depends on a published version. It never copies the source into its own tree.
