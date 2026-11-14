@@ -19,7 +19,7 @@ variables, and shown in the Storybook gallery. They carry no product wording.
 | Feedback | Toast, dialog, confirm dialog, popover, menu | Planned |
 | Theming | Theme switcher and colour vision mode switch | Planned |
 | Shell | App shell parts, window chrome, tray window | Planned (see [shell](shell.md)) |
-| Setup | The installer screens (see [installers](installers.md)) | Planned |
+| Setup | The installer screens, built in WPF from the tokens, not from these components (see [installers](installers.md)) | Planned |
 
 Some inventory items may merge or disappear. A badge, a status dot and a tag can be one component if
 the design pass finds they are one idea. That follows the rule that a status appears once.

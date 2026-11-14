@@ -1,143 +1,111 @@
 # Installers and setup branding
 
-Status: proposed. Nothing here is built. It needs a prototype before any product commits to it.
+Status: direction decided on 2026-11-14. Still to do: the tokens to XAML step, a home for the code, and the
+design pass for the screens.
 
-The setup experience is the first screen a person sees from a Matumi app. It follows the same system
-as the app: the same tokens, the same components, the same interface rules, and the product's own mark
-and name.
+## Decision
 
-## Goals
+Every Matumi Windows installer is a WiX Burn bundle, one `.exe`, with a custom WPF managed bootstrapper
+application, wrapping the product's MSI. This is the same approach as the Timebase installer, with the
+Matumi look. It replaces the earlier proposals: Matumi Setup in a webview, Velopack, and a Rust launcher.
 
-- Look and feel like the app, not like a generic Windows wizard.
-- Say each thing once, and ask only what the person must decide.
-- Keep what installers do well: rollback, repair, clean uninstall, Add or remove programs, and silent
-  installs for scripts and managed machines.
-- One way to build it for every product, so a new app gets a good installer without new design work.
+Why: of the options tried, the WPF window gave the best look, it is the only one that can show real
+pages with choices as well as a splash, and the MSI underneath keeps rollback, repair, services, drivers
+and firewall rules. Installers are built on Windows machines, so a Windows-only build is fine.
 
-## What exists today
+## What was tried (2026-11-14)
 
-Read from the repos on 2026-11-14.
+Spikes in scratch folders, installs only in throwaway locations, no real product touched.
 
-| Where | How |
+| Option | Result |
 |---|---|
-| Koppel, Windows | A WiX bundle (`Setup.exe`) around an MSI. The bundle uses WiX's standard bootstrapper UI with a custom theme file. The MSI installs the service, the USB driver, firewall rules and folder permissions |
-| Verteller, Windows | One per-user MSI, with the standard WiX dialogs, custom text and two generated bitmaps (banner and dialog image) |
-| Koppel, Linux | `.deb` and tarball built with nfpm, plus Docker images. No graphical installer |
-| ClaudeP (a separate project), macOS | A disk image and an app bundle, built by script |
+| Themed WiX standard bundle (Koppel today) | Background image and light or dark switching work. Buttons and the progress bar stay standard Windows controls. How text looks over an image was not captured |
+| Velopack Setup (Verteller) | Ran end to end: install, update in place, uninstall, data kept. A splash image and a progress bar, no pages. Per user only |
+| Velopack MSI (per machine) | Hooks run elevated and can create a service and a firewall rule, but a failing hook is reported as success, a hook is cut off at 30 s, and the MSI uses standard dialogs. Not usable for service apps |
+| Rust splash launcher around an MSI | Not finished. The spike was stopped |
+| **WPF managed bootstrapper in a Burn bundle** | Built and run. Chosen by the owner as the best look |
 
-One more installer, in a product outside Matumi, uses a managed (WPF) interface inside the MSI. It
-looks far better than a standard wizard. From its project file, it is built with WixSharp on
-.NET Framework 4.7.2, with its own copy of the interface code. This is the reference for what
-"custom" can look like. No code from it is used here.
+The Velopack branch for Verteller (`feat/RVR/velopack-installer`) is parked and not merged.
 
-## Why the current options fall short
+## How it works
 
-These limits are read from how each approach is built and from WiX's documented behaviour. If your own
-experience differs, correct this list.
-
-| Approach | Limits |
-|---|---|
-| Standard MSI dialogs with bitmaps | Fixed dialog layouts, static pictures, no live styling, no animation. Always looks like a wizard |
-| WiX standard bootstrapper with a theme file | Better, but still a fixed set of pages and controls described in XML. No shared components, no custom flow |
-| Managed UI (WPF or WinForms) in the MSI | Fully custom, but Windows only and tied to .NET Framework. A second UI codebase that cannot reuse the React components, so it drifts from the app |
-
-## Proposal: Matumi Setup
-
-A small Rust program with the setup screens built in React from Heartwood, that installs through the
-product's MSI.
-
-```
-Setup.exe  (Rust host, a webview, the React setup UI, the MSI as a payload)
-  checks the machine and what is already installed
-  shows the screens
-  asks for administrator rights only when the install needs them
-  runs the MSI quietly, and reads its progress through the Windows Installer external UI interface
-  shows progress, a clear failure with the log, and the finish screen
-```
-
-- **The MSI stays the engine.** It still installs the files, the service, the driver, the firewall rules
-  and the permissions, and it still rolls back on failure. A person or a script can still install the MSI
-  directly, with no Setup.exe.
-- **The React UI is shared.** The screens use `@matumi/ui` and `@matumi/tokens` through a new
-  `@matumi/setup` package, so Setup matches the app in light and dark, with the product's mark in the
-  shell's brand slot.
-- **The host is a Rust crate** in Heartwood (`src/crates/setup-host`), shared by every product. A product
-  supplies its MSI, its mark and its text, and does not write a host.
-- **Add or remove programs** points at Setup.exe for uninstall, repair and modify, as a WiX bundle does.
-  The MSI's own entry is hidden, so the person sees one entry and the custom screens each time.
-- **Silent installs** keep working: `Setup.exe /quiet` and a documented set of properties give the same
-  result as installing the MSI.
+- **The file.** The product ships one `.exe`, the Burn bundle. It holds the WPF window and the MSI. A plain
+  MSI is still built from the same source for managed deployment, where an administrator installs it with
+  `msiexec` or Group Policy and sees no window.
+- **The window.** A WPF application on .NET Framework 4.7.2, built on the `WixToolset.Mba.Core` package
+  (4.0.6) and loaded by the bundle through WiX's managed bootstrapper host. It listens to the engine's
+  events and draws everything itself.
+- **The chain.** A .NET Framework 4.7.2 prerequisite, then the MSI. Windows 10 from version 1803 and
+  Windows 11 include the framework, so the prerequisite only downloads it on very old Windows 10 builds.
+- **The MSI stays the engine.** It installs the files, services, drivers, firewall rules and permissions
+  and rolls back on failure. Koppel's MSI does not change.
+- **Add or remove programs.** One entry, from the bundle. Uninstall, repair and modify run the same window.
+- **Silent installs.** `Setup.exe /quiet` runs the bundle with no window and the same properties as today.
+- **Versions.** WiX stays on the free 4.0.6 line. The paid Open Source Maintenance Fee applies to the official
+  WiX 6 and 7 binaries (read in Timebase's build notes and in Velopack's documentation).
 
 ## Screens
 
-The screens are set per product by its task, under the same rules as the app. Typical content:
+The design pass designs the full set. Which of these a product shows depends on the product.
 
 | Screen | Content |
 |---|---|
-| Welcome | The product's name and mark, one sentence about what it does, and the one decision most people make (where it installs, if that is a real choice). It does not list what the installer will do |
-| Choices | Only decisions that change the result, such as a component or a start-up behaviour, each with a plain default. A choice that has one sensible answer is not asked |
-| Progress | One progress indication, and one line saying what is happening. No second percentage |
-| Finish | What happened and the one next step, such as opening the app. A failure says what went wrong and how to fix it, with the log one click away |
+| Welcome | The product's name and mark, one sentence, and the next step |
+| Licence | Only where a licence must be accepted |
+| Install location | Only where the choice is real |
+| Options | The product's own choices, such as the graphics card for Verteller or services for Koppel |
+| Prerequisites | What will be installed first and why |
+| Progress | One progress indication and one line saying what is happening |
+| Finish | What happened and the one next step, such as opening the app |
+| Failure | What went wrong, what to do, and the log one click away |
+| Upgrade | What changes when a newer version replaces an installed one |
+| Maintenance | Repair, change and uninstall for an installed product |
+| Uninstall | The same window, saying what stays, such as the user's data |
 
-Uninstall, repair and modify use the same shell and the same rules.
+The interface rules apply. Ask only for decisions that change the result, with a plain default. Each
+option is asked once: where an app has the same choice in its own Setup page, the installer or the app
+shows it, not both. That is decided per product.
 
 ## Branding
 
-Setup shows the product's own brand, not Heartwood's. Heartwood supplies the structure, the product
-supplies identity.
+Setup shows the Matumi brand as the backdrop and the product in front.
 
 | Thing | Where it comes from |
 |---|---|
-| Setup window and screens | `@matumi/setup`, in the product's mark, name and tokens |
-| Installer and shortcut icons, Add or remove programs icon | The product's app icon, drawn to the family rules |
-| Publisher shown by Windows | Matumi Software. Real publisher text on the UAC and SmartScreen prompts needs a code signing certificate |
-| Add or remove programs entry | Name, publisher, version, icon, links, written once by the host from the product's details |
-| Fallback MSI dialogs | Shown only if the MSI is run directly. Generated bitmaps from the tokens and the product mark, by one script, never drawn by hand |
-| macOS disk image | A background picture and icon layout generated from the tokens and the product mark, so the drag to Applications is branded and clear |
-| Linux packages | The desktop entry, the icon set and the package description, from the product's details. There is no graphical installer to brand |
-| Docker image page and repository | The product mark and a plain description |
+| Window background | A Matumi splash: the rings pattern on the base colour, generated from the tokens |
+| Product identity | The product's mark and name in the foreground, from the product repo. Never Heartwood's |
+| Colours, type, spacing | Generated from `@matumi/tokens` into a XAML resource dictionary by a script, so the installer moves with the tokens. Light or dark follows the system. The colour vision mode applies too |
+| Fonts | Instrument Sans and JetBrains Mono carried inside the application. Not verified |
+| Icons | The product's app icon for the bundle, the shortcuts and Add or remove programs |
+| Publisher | Matumi Software. Windows shows it on the prompts only for a signed program |
+| Fallback MSI dialogs | Shown only when the plain MSI is run with its window. Bitmaps generated from the tokens |
+| macOS | A disk image with a generated background and a clear drag to Applications |
+| Linux | Package metadata, the desktop entry and the icon set. No graphical installer |
 
-Art for the fallback dialogs and the disk image is generated by a script from the tokens, so it moves
-with the tokens. It is not edited by hand.
+## Where it lives
 
-## Risks and limits
+Not decided. The installer is C# and WPF, a third language beside React and Rust, so by the repository
+rules (a different language is a reason to split) it belongs in its own repository, shared by every
+product, not in Heartwood. A product supplies its MSI, its mark, its name and its option text.
 
-- **The unsigned warning does not go away.** A custom screen does not change what Windows shows before
-  the program runs. Only code signing does. Today the installers are unsigned.
-- **The webview.** Setup needs the Microsoft WebView2 runtime. It is built into Windows 11. On Windows 10
-  it is usually present but not guaranteed. This is from my knowledge of Microsoft's distribution and needs
-  checking. Setup must fall back to a plain native window with the same choices when it is missing, and
-  must never fail to install because of it.
-- **More to maintain.** Setup replaces what the WiX bundle does for free: the screen flow, the
-  elevation handling and the error reporting. The host has to be small and well tested.
-- **Chaining.** A WiX bundle can install several packages in order with rollback. Setup installs one MSI.
-  Koppel's bundle chains the Visual C++ runtime only because of third-party driver files. The runtime can
-  be carried with the product instead, as Verteller does.
-- **Security.** An installer is a trusted program. It must verify the payload it runs, run elevated only
-  for the MSI, and never run downloaded code without a check.
-- **Accessibility.** The setup screens must meet the same rules as the app, and be tested with the
-  keyboard and a screen reader.
-- **Linux and macOS.** This proposal covers Windows. The other platforms keep native packages, branded as
-  in the table above.
+## Risks and things not yet verified
 
-## Prototype and acceptance
+- **Quiet uninstall hung.** During cleanup the bundle's own `/uninstall /quiet` run did not finish. It may
+  be a result of stopping the spike mid-run, or a bug in the uninstall path with no window. Investigate
+  before shipping.
+- **Elevation.** The spike ran per user. Per-machine products such as Koppel need the bundle to elevate,
+  and that was not tested.
+- **Accessibility.** UI Automation, keyboard and screen reader behaviour of the WPF window are untested.
+- **Styles drift.** WPF cannot use Heartwood components. The token generation step is what prevents drift,
+  and it is not built.
+- **Unsigned.** Windows warns before an unsigned program runs. Signing is separate from this choice.
+- **Localisation and high contrast.** Not examined.
 
-1. Build the host and one screen flow for a product with no service or driver, such as Verteller or
-   Tweeling, per user and with no administrator prompt.
-2. It passes when:
-   - an install, upgrade, repair and uninstall all work, and a failed install rolls back cleanly
-   - `Setup.exe /quiet` and the plain MSI give the same result
-   - Add or remove programs shows one entry with the right icon and details
-   - it works with the keyboard and a screen reader, and in light and dark
-   - it degrades without WebView2
-3. Then Koppel, which tests the hard part: the service, the driver, the firewall rules, and a reboot
-   that the driver may ask for.
-4. Tests run in a virtual machine under `D:\testing`, per the testing rules. Installs wait for the
-   owner's UAC click where an elevation prompt appears.
+## Next steps
 
-## Still to decide
-
-- Whether this is the plan, or whether a themed WiX bundle is enough for products without a service.
-- Whether the screens are authored in the setup package or taken from the product's app screens.
-- Code signing: certificate, cost and who holds it.
-- The macOS disk image layout and the Linux story.
+1. The design pass produces the screens with all options, in light, dark and colour vision mode.
+2. Decide the repository and name.
+3. Build the tokens to XAML generator.
+4. Prototype with Verteller, which has the most options, then Koppel, which tests elevation, the service
+   and the driver.
+5. Test in a virtual machine or a throwaway location, with the owner clicking any UAC prompt.

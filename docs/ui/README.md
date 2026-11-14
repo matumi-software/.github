@@ -47,7 +47,7 @@ These apply to every screen, and a design that breaks one is not finished.
 | [shell.md](shell.md) | App shell parts and rules | Structure set |
 | [patterns.md](patterns.md) | Status, forms, tables, empty and error states, confirmation, toasts | Rules set |
 | [accessibility.md](accessibility.md) | Contrast, keyboard, focus, the colour vision mode, how it is tested | Set, sizes proposed, colour vision set to design |
-| [installers.md](installers.md) | Setup screens, installer branding for every platform | Proposed, needs a prototype |
+| [installers.md](installers.md) | The WiX and WPF installer for every Windows app, screens, branding for every platform | Direction decided, screens to design |
 | [contributing.md](contributing.md) | How to add a component, an icon, a release | Checks set, publishing undecided |
 
 ## Starting component inventory
