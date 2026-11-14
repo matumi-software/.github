@@ -82,6 +82,9 @@ Setup shows the Matumi brand as the backdrop and the product in front.
 | macOS | A disk image with a generated background and a clear drag to Applications |
 | Linux | Package metadata, the desktop entry and the icon set. No graphical installer |
 
+Every product follows the same package names, repository layout and build interface, set in
+`docs/release-packages.md`.
+
 ## Where it lives
 
 In Heartwood, under `src/installer`, beside the tokens it is generated from. It is shared code, and shared
