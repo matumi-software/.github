@@ -37,16 +37,18 @@ These apply to every screen, and a design that breaks one is not finished.
 
 ## Outline
 
-| File | Covers |
-|---|---|
-| `principles.md` | Look and feel, density, tone, motion, dark first, what we avoid |
-| `tokens.md` | Colour roles, type scale, spacing, radii, shadows, motion, light and dark |
-| `iconography.md` | Icon set, grid, stroke, sizes, when to use an icon alone |
-| `components.md` | One entry per component: purpose, anatomy, variants, states, accessibility |
-| `shell.md` | App shell: sidebar, header, page layout, window chrome, tray windows |
-| `patterns.md` | Forms, tables, empty states, errors, confirmations, toasts, loading |
-| `accessibility.md` | Contrast, keyboard, focus, target size, screen reader rules, how it is tested |
-| `contributing.md` | How to add or change a component, and how apps consume a release |
+| File | Covers | Status |
+|---|---|---|
+| [principles.md](principles.md) | Look and feel, ambition, density, motion, what we avoid | Set |
+| [tokens.md](tokens.md) | Colour, spacing, radius and shadow tokens, light and dark | Set, with status colours, type scale, motion and chart colours still to define |
+| [branding.md](branding.md) | Matumi, Heartwood and product layers, existing product branding, Heartwood's own brand | Layers set, Heartwood brand to design |
+| [iconography.md](iconography.md) | Icon sets, grid, rules for custom icons | Direction set |
+| [components.md](components.md) | Inventory and the entry format, Button as built | One built |
+| [shell.md](shell.md) | App shell parts and rules | Structure set |
+| [patterns.md](patterns.md) | Status, forms, tables, empty and error states, confirmation, toasts | Rules set |
+| [accessibility.md](accessibility.md) | Contrast, keyboard, focus, how it is tested | Set, sizes proposed |
+| [installers.md](installers.md) | Setup screens, installer branding for every platform | Proposed, needs a prototype |
+| [contributing.md](contributing.md) | How to add a component, an icon, a release | Checks set, publishing undecided |
 
 ## Starting component inventory
 
