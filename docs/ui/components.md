@@ -16,7 +16,7 @@ variables, and shown in the Storybook gallery. They carry no product wording.
 | Data | Table, list row, empty state, area chart | Planned |
 | Navigation | Sidebar, nav button, tabs, breadcrumbs, page header | Planned |
 | Feedback | Toast, dialog, confirm dialog, popover, menu | Planned |
-| Theming | Theme switcher | Planned |
+| Theming | Theme switcher and colour vision mode switch | Planned |
 | Shell | App shell parts, window chrome, tray window | Planned (see [shell](shell.md)) |
 | Setup | The installer screens (see [installers](installers.md)) | Planned |
 

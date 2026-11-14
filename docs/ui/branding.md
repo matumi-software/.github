@@ -43,6 +43,8 @@ Read from the repos on 2026-11-14. These vary a lot, and Heartwood must absorb e
   where they can.
 - A product token that repeats a Heartwood token is removed when the product adopts Heartwood. Where the
   values differ, the difference is settled once, in Heartwood, with the product's owner.
+- A product that adds colours must also add a colour vision set for them (see
+  [accessibility](accessibility.md)).
 - Product state words and copy rules stay with the product. Heartwood supplies the components that show
   a state, not the words.
 - A product component stays in the product until a second product needs it. Then it is proposed to

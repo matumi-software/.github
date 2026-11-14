@@ -75,5 +75,6 @@ One shadow, for popovers, menus and dialogs. Nothing else casts one.
 | Status colours: success, warning, danger, info | Fill, subtle background and text for each, in both themes. None exist yet, and badges, callouts and destructive buttons need them |
 | Type scale | Sizes, weights and line heights for display, title, heading, body, small, caption and mono |
 | Motion | Durations and easings, with a reduced-motion rule |
+| Colour vision set | A second set of status, state and chart colours for the colour vision mode, with the glyph and pattern rules, tested under each type of colour vision. See [accessibility](accessibility.md) |
 | Chart colours | A colour-blind safe categorical set from `accent` and `river`, plus sequential and diverging ramps |
 | Extra elevation | Only if a design needs more than the one shadow |
