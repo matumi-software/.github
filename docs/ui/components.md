@@ -10,9 +10,10 @@ variables, and shown in the Storybook gallery. They carry no product wording.
 | Group | Component | State |
 |---|---|---|
 | Actions | Button (primary, secondary, ghost; sm, md) | Built |
-| Actions | Icon button, destructive button, segmented control | Planned |
+| Actions | Icon button (always with a tooltip and an accessible name), destructive button, segmented control | Planned |
 | Inputs | Text input, search input, number field, select, combobox, checkbox, radio, switch, textarea | Planned |
-| Display | Badge, status dot, tag, card, KPI card, callout, avatar, tooltip, progress, skeleton | Planned |
+| Display | Badge, status dot, tag, card, KPI card, callout, avatar, progress, skeleton | Planned |
+| Display | Tooltip (name and one explanatory line, with the shortcut) | Planned, needed first because icon-only controls depend on it |
 | Data | Table, list row, empty state, area chart | Planned |
 | Navigation | Sidebar, nav button, tabs, breadcrumbs, page header | Planned |
 | Feedback | Toast, dialog, confirm dialog, popover, menu | Planned |
