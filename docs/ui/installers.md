@@ -66,6 +66,42 @@ The interface rules apply. Ask only for decisions that change the result, with a
 option is asked once: where an app has the same choice in its own Setup page, the installer or the app
 shows it, not both. That is decided per product.
 
+## What a product tells the window
+
+A product gives the bootstrapper a `setup.json`. The contract is documented in Heartwood
+(`src/installer/bootstrapper/README.md`). It is validated when the product builds, so a bad file fails the build
+and never a person's install. Unknown fields are errors. These parts matter for the design:
+
+| Part | What it does |
+|---|---|
+| `tagline`, `welcomeNote` | A short heading line, and an optional note under it that says what is installed |
+| `options` | `bool`, `choice`, `folder`, `number` and `text`, each with a plain label, optional help, a default and the property it sets |
+| `licence` | Optional, with an optional acceptance checkbox that the primary button waits for |
+| `launch` | What the Finish screen offers to open: the target (or one read from the registry, so an existing install in another folder opens correctly), an optional label, and which kinds of run offer it (default: all but uninstall) |
+| `finishNotes` | Ordered notes on the Finish screen, per kind of run, optionally only when a registry value or a variable meets a condition (for example a note about a failed optional step) |
+| `restartNote` | Words for the Restart screen, such as why a driver needs a restart |
+| `uninstallOption` | An optional checkbox under Uninstall, off by default and never shown on an upgrade, such as "Also delete my settings" |
+| `uninstallNote` | What stays after an uninstall |
+
+Text in the notes can use bundle variables (`[VAR]`), environment variables (`%APPDATA%`, and `%NAME|fallback%` when a
+variable may be unset) and, in a finish note, `{value}` for the value its condition read. The copy rules apply to all of
+it: nothing repeated on a screen and the product name only in the header. The screenshot harness checks that.
+
+The command line accepts any variable the bundle declares as overridable, for example `Setup.exe /quiet GPU=cpu`. Burn,
+WiX and Windows built-ins are refused.
+
+The primary button reads Install on the last page before Progress, Next before that, and Update, Repair, Change, Apply or
+Uninstall for those runs. A product that has an uninstall option opens Maintenance with Uninstall preselected when it is
+started from Apps, so the option is seen.
+
+## Build
+
+- One Apps entry. The bundle's MSI package sets `ARPSYSTEMCOMPONENT=1`, and the build checks the built bundle.
+- The module validates the MSI (`wix msi validate`) with a list of suppressed rules and fails on any other warning.
+- Products can add WiX extensions (4.0.6 only) and name their main exe so a shortcut can refer to it.
+- WiX's temporary files go next to the output folder, never into the user's temp folder on C:.
+- Burn passes `BURNMSIINSTALL=1` to an MSI it installs, so an MSI can tell a bundle run from a plain run.
+
 ## Layout
 
 The window has one fixed layout, so nothing moves between screens and a person can click without looking.
