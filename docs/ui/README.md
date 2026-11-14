@@ -49,6 +49,7 @@ Chosen because it is accessible by default and already proven in a working dashb
 - react-aria-components for behaviour and accessibility
 - class-variance-authority, clsx and tailwind-merge for variants
 - lucide-react as the starting icon set, with Heartwood's own icons added on top
+- Storybook for the gallery
 - Vitest, Testing Library and vitest-axe for tests
 - A lint rule that rejects hard-coded colours, spacing and sizes, so only tokens are used
 
@@ -58,7 +59,4 @@ Chosen because it is accessible by default and already proven in a working dashb
   in this repo, imported once. The brand file stays the reference for logos and brand colours.
 - Icons: lucide-react as the base, plus custom Matumi icons where lucide has no icon or the
   existing one does not fit. A custom icon has the same grid, stroke and sizes as the lucide set.
-
-## Open decisions
-
-- Gallery: Storybook or a custom app.
+- Gallery: Storybook, themed with Heartwood's own branding. It lives in `src/apps/gallery`.

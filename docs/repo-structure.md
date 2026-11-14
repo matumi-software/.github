@@ -73,7 +73,7 @@ heartwood/<branch>/
       ui/          React components
       shell/       app shell, navigation, window chrome
     apps/
-      gallery/     browse every component; not published
+      gallery/     Storybook, browse every component; not published
 ```
 
 - Packages publish as `@matumi/<name>`: `@matumi/tokens`, `@matumi/icons`, `@matumi/ui`,
