@@ -52,9 +52,13 @@ Chosen because it is accessible by default and already proven in a working dashb
 - Vitest, Testing Library and vitest-axe for tests
 - A lint rule that rejects hard-coded colours, spacing and sizes, so only tokens are used
 
+## Decisions
+
+- Token source of truth: `@matumi/tokens` in Heartwood. It starts from `resources/brand/tokens.json`
+  in this repo, imported once. The brand file stays the reference for logos and brand colours.
+- Icons: lucide-react as the base, plus custom Matumi icons where lucide has no icon or the
+  existing one does not fit. A custom icon has the same grid, stroke and sizes as the lucide set.
+
 ## Open decisions
 
-- Where the token source of truth lives: `resources/brand/tokens.json` here, or in
-  `@matumi/tokens`.
 - Gallery: Storybook or a custom app.
-- Icons: keep lucide, or draw a Matumi set.
