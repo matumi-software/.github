@@ -15,7 +15,7 @@ and the behaviour, and an app arranges them to fit its task.
 | Window chrome | The title bar and controls of a desktop window, matching the theme |
 | Tray window | A small popover from the system tray: one task, no navigation |
 | Brand slot | Shows the product's own mark and name, never Heartwood's (see [branding](branding.md)) |
-| Account and theme | Where they exist: theme switch, and the account or connection area |
+| Account and theme | Where they exist: the theme switch, the colour vision mode, and the account or connection area |
 
 ## Rules
 
