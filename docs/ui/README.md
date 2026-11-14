@@ -26,6 +26,10 @@ These apply to every screen, and a design that breaks one is not finished.
 - **It must not look generated.** No icon on every card, no uniform grids of identical cards, no
   gradients, glows or emoji, no oversized hero headings in a tool, no pills on everything.
   Hierarchy comes from spacing, weight and alignment, not from boxes and colour.
+- **Start from the task, not from a default layout.** Be ambitious where it makes the task clearer
+  or more enjoyable, and conventional where familiarity helps. Ambition and ease of use can
+  reinforce each other or pull apart, and there is no fixed winner: judge each screen on its task.
+  A stranger should be able to start the core task without instructions.
 - **Write for an intelligent adult.** Plain, direct text. No cheerleading, no explaining the
   obvious, no filler.
 - **Review it that way.** The checklist for any new screen: what is shown twice, and what could be
