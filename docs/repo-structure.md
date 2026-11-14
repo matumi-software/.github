@@ -56,7 +56,7 @@ is justified only by a different language, licence or audience, or release caden
 | `koppel`, `tweeling`, `verteller`, `strook` | One product each |
 | `skakel` | The Rust SDK, used by Koppel and Tweeling |
 | `wildwood` | Grove, Forester, Warden |
-| `heartwood` | Shared TypeScript libraries, starting with the UI |
+| `heartwood` | Shared React and Rust libraries, starting with the UI |
 
 ## Heartwood
 
@@ -67,6 +67,8 @@ heartwood/<branch>/
   src/
     package.json
     pnpm-workspace.yaml
+    Cargo.toml     once the first shared crate arrives
+    crates/        shared Rust crates
     packages/
       tokens/      colours, type, spacing, radii, motion as CSS variables
       icons/
