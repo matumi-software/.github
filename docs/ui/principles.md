@@ -39,7 +39,7 @@ off when the person asks for reduced motion. Durations and easings are still to 
 ## What we avoid
 
 The list in the README under "It must not look generated", plus: modal chains, tooltips that carry
-essential information, colour as the only signal, and anything that looks interactive and is not.
+essential information (a tooltip explains, it never holds what the person needs to finish a task), colour as the only signal, and anything that looks interactive and is not.
 
 ## Writing
 

@@ -16,6 +16,21 @@ Status: the contrast and test rules are set. The size rules are proposed.
 - Proposed: a target is at least 32 px high, and 40 px for a primary action.
 - Motion respects the reduced-motion setting.
 
+## Icon-only controls and tooltips
+
+- An icon-only control has an accessible name (a label for screen readers) that is the same text as the
+  first line of its tooltip. The tooltip is never the only place the name exists.
+- The tooltip shows on hover and on keyboard focus, after a short delay, and without the delay when
+  moving between neighbouring controls in the same group.
+- It meets the WCAG 2.1 rule for content on hover or focus: it can be dismissed with Escape without moving
+  focus, the pointer can move onto it without it vanishing, and it stays until dismissed, moved away from or
+  no longer valid.
+- It holds no information that is needed to complete a task, no links and no controls. Anything essential
+  goes in the interface itself, because tooltips do not appear on touch and are easy to miss.
+- It is short, in plain text, readable in both themes and in the colour vision mode, and it does not cover
+  the control that opened it.
+- Target size still applies: an icon-only control is not smaller than any other control.
+
 ## Colour vision mode
 
 Every app has a colour vision mode, a setting that anyone can turn on. It is for people with colour
