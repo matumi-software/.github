@@ -66,6 +66,26 @@ The interface rules apply. Ask only for decisions that change the result, with a
 option is asked once: where an app has the same choice in its own Setup page, the installer or the app
 shows it, not both. That is decided per product.
 
+## Layout
+
+The window has one fixed layout, so nothing moves between screens and a person can click without looking.
+
+- **One window size** for every screen of a product, not resizable. The design pass sets the size, and every
+  product uses the same one.
+- **Three fixed zones.** A header (the product's mark, its name and where you are), a content area, and a footer.
+  Each keeps the same position and size on every screen.
+- **Fixed button positions.** The footer holds every button, in the same places on every screen: Cancel on the
+  left, and on the right Back, then the primary action at the far right. The primary button's label changes
+  (Install, Next, Finish, Repair) and its position does not. A button that does not apply on a screen leaves its
+  place empty, so the others never shift.
+- **The content area never changes the window.** Long content, such as a long option list or a licence, scrolls
+  inside the content area. The window does not grow.
+- **The status line and the progress bar** sit in the same place on every screen that shows them.
+- **Keyboard.** Tab goes through the content, then the footer. Enter presses the primary action and Escape
+  asks to cancel. The focus ring is always visible.
+- **Checked by a test.** The screenshot harness measures every button and zone on every screen and fails when a
+  position or size differs from the one on the Welcome screen.
+
 ## Branding
 
 Setup shows the Matumi brand as the backdrop and the product in front.
