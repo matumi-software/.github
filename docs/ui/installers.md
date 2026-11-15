@@ -92,7 +92,7 @@ backticks around them if it wants.
 
 The copy rules apply to all of it: nothing repeated on a screen, and the product name only in the header. The name is
 allowed inside inline code and inside a path (a token with no spaces that holds a `\` or `/`, such as
-`C:\ProgramData\Koppel` or `%APPDATA%erteller`), because there it is something to type or find. The name in a
+`C:\ProgramData\Koppel` or `%APPDATA%\verteller`), because there it is something to type or find. The name in a
 heading, sentence or label still fails. A path with spaces around the name needs backticks. The screenshot harness checks
 all of this, and monospace runs wrap inside the content zone like other text, so they never move the layout.
 
