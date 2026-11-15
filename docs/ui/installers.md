@@ -84,8 +84,17 @@ and never a person's install. Unknown fields are errors. These parts matter for 
 | `uninstallNote` | What stays after an uninstall |
 
 Text in the notes can use bundle variables (`[VAR]`), environment variables (`%APPDATA%`, and `%NAME|fallback%` when a
-variable may be unset) and, in a finish note, `{value}` for the value its condition read. The copy rules apply to all of
-it: nothing repeated on a screen and the product name only in the header. The screenshot harness checks that.
+variable may be unset) and, in a finish note, `{value}` for the value its condition read. In the notes (`welcomeNote`,
+`finishNotes`, `restartNote`, `uninstallNote`) and in the help of an option or the uninstall option, words between
+backticks are shown as code in the theme's mono font, in the same colour, without the backticks. A backtick with no
+partner on its line is shown as it is. Paths that come from expansion are not backticked for you; a product puts the
+backticks around them if it wants.
+
+The copy rules apply to all of it: nothing repeated on a screen, and the product name only in the header. The name is
+allowed inside inline code and inside a path (a token with no spaces that holds a `\` or `/`, such as
+`C:\ProgramData\Koppel` or `%APPDATA%erteller`), because there it is something to type or find. The name in a
+heading, sentence or label still fails. A path with spaces around the name needs backticks. The screenshot harness checks
+all of this, and monospace runs wrap inside the content zone like other text, so they never move the layout.
 
 The command line accepts any variable the bundle declares as overridable, for example `Setup.exe /quiet GPU=cpu`. Burn,
 WiX and Windows built-ins are refused.
