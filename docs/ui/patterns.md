@@ -34,8 +34,9 @@ or why. A connected device does not get a badge, a green dot and a sentence.
 - An empty list is not something that needs attention. It never goes in a "Needs you" tile or a
   count. Those hold only what is asking the person to act: a failure, a missing download, an invite
   waiting.
-- A true empty state (the single message and action of an empty state component) is for a place with
-  no way to add from it, such as a history that fills by itself.
+- A history that fills by itself, such as Activity, is the same: its normal page with no rows, and no
+  banner, because there is nothing to tell the person to do.
+- The empty state component is for a search with no matches, and for a failed load.
 - Loading shows the shape of what is coming. A spinner is for waits the person caused.
 - An error says what happened and what to do. It sits where the problem is, and it appears once.
 
