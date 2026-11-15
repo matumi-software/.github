@@ -27,8 +27,15 @@ or why. A connected device does not get a badge, a green dot and a sentence.
 
 ## Empty, loading and error states
 
-- An empty state says what belongs here and offers the one action that fills it. No illustration is
-  needed.
+- A list with nothing in it is not a different screen. The page keeps its normal layout and its
+  normal way to add: the list is empty, and the add form or editor is there. An info banner above it
+  says what belongs here and what to do first. No custom "nothing yet" page, no illustration, and no
+  extra step before the person can start.
+- An empty list is not something that needs attention. It never goes in a "Needs you" tile or a
+  count. Those hold only what is asking the person to act: a failure, a missing download, an invite
+  waiting.
+- A true empty state (the single message and action of an empty state component) is for a place with
+  no way to add from it, such as a history that fills by itself.
 - Loading shows the shape of what is coming. A spinner is for waits the person caused.
 - An error says what happened and what to do. It sits where the problem is, and it appears once.
 
