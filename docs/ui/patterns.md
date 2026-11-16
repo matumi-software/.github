@@ -46,7 +46,36 @@ or why. A connected device does not get a badge, a green dot and a sentence.
   ("Delete device"), not "OK".
 - Prefer undo to confirmation when the action can be reversed.
 
+## Accounts and sign-in
+
+Apps with accounts follow these rules. The shared pieces are `PeoplePage`, `AccountPage`,
+`SetPasswordDialog` and `SignInPage` in Heartwood.
+
+- **Codes are short-lived and shown on the host only.** An invitation or password reset code is
+  one-time and lasts 1 minute. The countdown runs on the code, and when it runs out the person asks
+  for a new one. The code appears only on the computer that runs the app, never on a remote screen:
+  there Invite and Reset are off and a note says where to do them. The Invitation tile also gives the
+  address the invited person opens, so the code does not arrive without a place to enter it.
+- **A password is at least 10 characters, everywhere.** The sign-up with an invitation, a change, a
+  reset and a first password all use the same minimum and the same sentence ("Use at least 10
+  characters."). One app does not accept less on one screen than on another.
+- **Forgot password? is quiet, and offered only where the app trusts the person without their
+  current password.** That is the owner on the computer that runs the app, because anyone who can
+  sit there can already do anything. It is a ghost button beside the change action on the account
+  page, not a primary action, and it opens the same dialog without the current password. It is hidden
+  on a remote screen and for a member, whose way back is a reset code from the owner. The help under
+  Password says which applies to this person.
+- **The signed-out form tells the owner the way in.** A short note under the form, such as "The
+  owner can also sign in on studio-pc by running verteller open.", so the one person who can recover
+  without a code is not left guessing. A member never needs it, and it takes no space of its own.
+- **A change in flight shows on its row, not in a toast.** Removing a person or signing a device out
+  waits for the app. The row says "Removing" or "Signing out" and its action is disabled. If the app
+  refuses, the row says "Not removed: ..." or "Not signed out: ..." with the reason, until the next
+  try. The row is where the person is looking, and it is gone or settled when the answer comes, so
+  no toast is needed.
+
 ## Toasts
 
 A toast reports the result of something the person did and is not visible on screen. It is never the
 only place an error appears.
+A change to a row in a list is not reported by a toast: the row shows it (see Accounts and sign-in).
