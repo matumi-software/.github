@@ -100,3 +100,18 @@ release notes to the GitHub release, and publishes any container image. Nothing 
 | Skakel | None. It is a library | | Release package: the crates, the virtual camera files, notices and checksums |
 
 Forester and Warden are not started and get an installer when they exist.
+
+## Products with a private build
+
+A product that is open source with a paid tier (see "Open core and private repos" in `repo-structure.md`)
+ships its official packages from the private `<product>-pro` repo, with the same file names, the same
+installer and the same checks as any other product. Verteller is the first.
+
+- The private repo has its own `src/installer/windows/build.ps1` with the same parameters. It builds the
+  private binary, then runs the open repo's staging and Heartwood's shared module over it, so nothing about
+  the installer is copied.
+- The open repo's `build.ps1` still builds the open (Free) binary, for people who build from source.
+- The licence's public key is baked into the binary when it is built. A release-test package, made with a test
+  key from the licence tools, says so in its file name suffix (`-test`) and is never published. An official
+  package is made with the production key only.
+- The notices cover every crate in the private build, not only the open ones.
