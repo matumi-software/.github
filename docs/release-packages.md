@@ -107,11 +107,11 @@ A product that is open source with a paid tier (see "Open core and private repos
 ships its official packages from the private `<product>-pro` repo, with the same file names, the same
 installer and the same checks as any other product. Verteller is the first.
 
-- The private repo has its own `src/installer/windows/build.ps1` with the same parameters. It builds the
+- The private repo has its own `src/installer/windows/build.ps1` with the same parameters and the ones the private build needs (the licence key kind and public key, and the open checkout). It builds the
   private binary, then runs the open repo's staging and Heartwood's shared module over it, so nothing about
   the installer is copied.
 - The open repo's `build.ps1` still builds the open (Free) binary, for people who build from source.
 - The licence's public key is baked into the binary when it is built. A release-test package, made with a test
   key from the licence tools, says so in its file name suffix (`-test`) and is never published. An official
   package is made with the production key only.
-- The notices cover every crate in the private build, not only the open ones.
+- The notices cover every public crate in the private build, not only the open ones. The private crates are left out of the list and the shipped `LICENSE` covers them.
