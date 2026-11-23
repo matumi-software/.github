@@ -61,6 +61,35 @@ product with its own users.
 | `skakel` | The Rust SDK, used by Koppel and Tweeling |
 | `wildwood` | Grove, Forester, Warden |
 | `heartwood` | Shared libraries: the React UI, Rust crates when they arrive, and the C# installer used by every Windows app |
+| `licensing` | Private. The licence check library (`matumi-licensing`) and the licence tools, shared by every app with a paid tier |
+| `<product>-pro` | Private. The official build of an open source product, with its paid features and the licence check. Today `verteller-pro` |
+
+## Open core and private repos
+
+A product that is open source with a paid tier is two repos: the open one, which is the product, and a
+private `<product>-pro` that wraps it. Both follow the layout above. These rules apply on top:
+
+- **The open repo never names the private one.** It defines hooks (traits and extension points) and its own
+  free answers, and builds and runs with no access to anything private. The private repo depends on the open
+  repo by a pinned commit, never the other way round.
+- **The free tier is real.** What a person gets without the private build is stated in the open repo's README
+  and works with no account and no network call to us.
+- **The edition is a licence, never a flag.** No setting, environment variable or file turns a paid feature
+  on in a release build except a signed licence that verifies against a public key baked in when the build was
+  made. A bad or missing licence leaves the person on the free tier, says why, and never stops the app.
+- **Keys and tokens stay out of every repository.** A signing key lives in the owner's own data folder, or on
+  the licence service. A test key may be used only for a release test and a build made with one is never
+  shipped. The debug-only dev licence never compiles into a release build.
+- **Official installers are built from the private repo.** The open repo's `build.ps1` builds the open
+  binary. The private repo's installer uses the open repo's staging and Heartwood's shared module, so the
+  packages are the ones in `docs/release-packages.md`, with the private binary inside.
+- **Private repos use the same layout, brand and docs standard.** Each has a README with the product's mark,
+  a `LICENSE` that says it is proprietary, a `CHANGELOG.md`, a `CLAUDE.md` with its layout and rules, and
+  a `docs/` folder. The marks are the open product's, copied into `resources/brand`.
+- **A private repo with a UI uses Heartwood** like any other app. `licensing` is the example: its studio page
+  is built on `@heartwood/ui`.
+- Non-commercial models and other third-party licence limits are enforced in the open core, and the private
+  repo never adds a way round them.
 
 ## Heartwood
 
